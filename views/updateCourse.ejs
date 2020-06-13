@@ -1,0 +1,56 @@
+<%- include ('header') %>
+<div class="row">
+    <div class="col">
+        <h1><%=title%></h1>        
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                    <tr>
+                        <td>
+                            <img src="<%=matchedCourse.photo%>" width="80px" />
+                        </td>
+                        <td><%=matchedCourse.name%></td>
+                        <td><%=matchedCourse.duration%></td>
+                    </tr>
+            </tbody>
+        </table>        
+    </div>
+</div>
+<form action="/courses/updateCourse/<%=matchedCourse.name%>" method="post">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" />
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" name="description" rows="5"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="photo">Photo URL</label>
+        <input type="text" class="form-control" name="photo" />
+    </div>
+    
+    <div class="form-group">
+        <label for="duration">Duration (Hrs)</label>
+        <input type="number" class="form-control" name="duration" />
+    </div>
+    
+    <button class="btn btn-primary">Update</button>
+</form>
+
+<%- include ('footer') %>

@@ -1,0 +1,56 @@
+<%- include ('header') %>
+
+<div class="row">
+    <div class="col">
+        <h3>Register</h3>
+        <hr />
+        <form action="/register" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" />
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" />
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" />
+            </div>
+
+            <div class="form-group">
+                <label for="access">Access</label>
+                <select name="mode">
+                    <option value="student">student</option>
+                    <option value="instructor">instructor</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary">Signup</button>
+        </form>
+    </div>
+    
+    <div class="col">
+        <h3>Login</h3>
+        <hr />
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" />
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" />
+            </div>
+
+            
+            
+            <button class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+
+<%- include ('footer') %>

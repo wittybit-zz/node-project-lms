@@ -1,0 +1,38 @@
+<%- include ('header') %>
+<div class="row">
+    <div class="col">
+        <h1><%=title%></h1>        
+    </div>
+    
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <% courses.forEach((course, index) => { %>
+                    <tr>
+                        <td><%=(index+1)%></td>
+                        <td>
+                            <img src="<%=course.photo%>" width="80px" />
+                        </td>
+                        <td><%=course.name%></td>
+                        <td><%=course.duration%></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>        
+    </div>
+</div>
+
+<%- include ('footer') %>
