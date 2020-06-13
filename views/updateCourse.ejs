@@ -29,28 +29,28 @@
         </table>        
     </div>
 </div>
-<form action="/courses/updateCourse/<%=matchedCourse.name%>" method="post">
+<form action="/courses/updateCourse/<%=matchedCourse.name%>" method="POST">
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" name="name" />
+        <input type="text" class="form-control" name="name" value="<%=matchedCourse.name%>"/>
     </div>
     
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" name="description" rows="5"></textarea>
+        <input class="form-control" name="description" value="<%=matchedCourse.description%>">
     </div>
     
     <div class="form-group">
         <label for="photo">Photo URL</label>
-        <input type="text" class="form-control" name="photo" />
+        <input type="text" class="form-control" name="photo" value="<%=matchedCourse.photo%>"/>
     </div>
     
     <div class="form-group">
         <label for="duration">Duration (Hrs)</label>
-        <input type="number" class="form-control" name="duration" />
+        <input type="number" class="form-control" name="duration" value="<%=matchedCourse.duration%>"/>
     </div>
     
-    <button class="btn btn-primary">Update</button>
+    <input type="submit" class="btn btn-primary" value="Update">
 </form>
 
 <%- include ('footer') %>

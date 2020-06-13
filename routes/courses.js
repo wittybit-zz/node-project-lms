@@ -12,7 +12,7 @@ router.get('/studentCourses', CourseController.studentCourses)
 
 //Process
 router.post('/createCourse', CourseValidator.createCourseValidator, CourseController.createCourseProcess)
-router.post('/updateCourse/:id', CourseController.createCourseProcess)
+router.post('/updateCourse/:id', CourseController.updateCourseProcess)
 router.get('/deleteCourse/:id', CourseController.deleteCourse)
 
 module.exports = router

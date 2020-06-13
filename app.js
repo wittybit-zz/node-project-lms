@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 
+mongoose.set('useFindAndModify', false);
+
 const courseRouter = require('./routes/courses')
 const userRouter = require('./routes/users')
 

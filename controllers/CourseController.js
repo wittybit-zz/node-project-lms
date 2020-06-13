@@ -1,24 +1,28 @@
 const Course = require('../models/Course')
 
 exports.updateCourseProcess = (req, res) => {
-    const { id, name, description, photo, duration } = req.body
-    const entry = req.params.id
-    Course.findOneAndUpdate({ name: entry })
-        .then(course => {
-            course.name = name
-            course.description = description
-            course.photo = photo
-            course.duration = duration
-            
-            return course.save()
-        })
-        .then(course => {
-            res.redirect('/course/listCourses')
-        })
+    // const {name, description, photo, duration } = req.body
 
+    const myBodyData = {
+        name : req.body.name,
+        description : req.body.description,
+        photo: req.body.photo,
+        duration : req.body.duration
+    }
+    const entry = req.params.id
+    
     //find and delete the course
+    Course.findOneAndUpdate({name: entry}, myBodyData, function(err, course){
+        if(err)
+            return next(err)
+        res.redirect('/courses/listCourses')
+        console.log('entry',entry,myBodyData)
+    })
+    
     
 }
+
+
 
 exports.createCourseProcess = (req, res) => {
     const { name, description, photo, duration } = req.body
@@ -85,6 +89,7 @@ exports.updateCourse = (req, res) => {
             title: 'LMS | Course to edit',
             matchedCourse
         }
+        console.log("///////////////////////////////////////////////////")
         console.log(matchedCourse)
         res.render('updateCourse', data)
     })
@@ -95,10 +100,26 @@ exports.updateCourse = (req, res) => {
     })
 
     
-    const tgt = req.params.id
-    Course.findOneAndDelete({name: tgt})
+    // const tgt = req.params.id
+    // Course.findOneAndDelete({name: tgt})
     
 }
+
+// exports.updateCourse = (req, res) => {
+//     const id = req.params.id
+//     console.log(id)
+//     Course.findOne({name: id})
+//         .then(matchedCourse => {
+//             const data = {
+//                 title: 'LMS | Edit Course',
+//                 course: matchedCourse
+//             }
+//             console.log(data)
+//             res.render('updateCourse',data)
+//         })
+        
+        
+// }
 
 exports.deleteCourse = (req, res) => {
     const name = req.params.id

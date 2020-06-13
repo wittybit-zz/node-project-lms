@@ -1,6 +1,9 @@
 const bcrypt = require('bcryptjs')
 const User = require('../models/User')
 
+var logged_in = false
+var mail = null
+
 exports.loginForm = (req, res) => {
     const data = {
         title: 'LMS | Login'
@@ -11,16 +14,22 @@ exports.loginForm = (req, res) => {
 exports.loginProcess = (req, res) => {
     const { email, password } = req.body
     
+    
     User.findOne({ email })
         .then(user => { //user = new User()
             if(user) {
                 const valid = bcrypt.compareSync(password, user.password)
                 
                 if(valid && user.isInstructor == true) {
+                    logged_in = true;
+                    mail = user.email
                     res.redirect('/courses/listCourses')
+                    //res.render('/courses/listCourses')
                 }
                 else if(valid && user.isInstructor == false)
                 {
+                    logged_in = true;
+                    mail = user.email
                     res.redirect('courses/studentCourses')
                 } else {
                     console.log('Not Valid Password')
@@ -57,4 +66,18 @@ exports.registerProcess = (req, res) => {
     user.save()
         .then(() => res.redirect('/login'))
         .catch(err => res.send(err))
+}
+
+exports.userDashboard = (req, res) => {
+    User.findOne(mail)
+        .then(user => {
+                const title = 'LMS | Dashboard'
+                const user1 = user
+            // console.log('///////////////////////////////////////////////////////')
+            //console.log(data)
+            res.render('dashboard', {title:title , user: user1})
+        })
+        .catch(err => {
+            res.json(err)
+        })
 }
