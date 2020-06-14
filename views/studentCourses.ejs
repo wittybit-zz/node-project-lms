@@ -30,7 +30,7 @@
                         <td><%=course.name%></td>
                         <td><%=course.duration%></td>
                         <td>
-                        <a href="/courses/courseDetails/<%=course._id%>"><button class="btn btn-primary">View Course Details</button></a>    
+                        <a href="/courses/courseDetails/<%=course._id%>/<%= user.name %>"><button class="btn btn-primary">View Course Details</button></a>    
                         </td>
                     </tr>
                 <% }) %>

@@ -1,7 +1,19 @@
  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-secondary text-light border-bottom shadow-sm">
   <h5 class="my-0 mr-md-auto font-weight-normal">LMS</h5>
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-light" href="/courses/listCourses">Courses</a>
+    <%if(user.isInstructor) {%>
+      <a class="p-2 text-light" href="/courses/listCourses/<%= user.name %>">Courses</a>
+      <%} else { %>
+        <a class="p-2 text-light" href="/courses/studentCourses/<%= user.name %>">Courses</a>
+        <% }  %>
   </nav>
-  <a class="btn btn-outline-primary bg-dark" href="/login">Sign up</a>
+  <div class="dropdown show">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= user.name %>
+    </a>
+  
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" href="/login">Logout</a>
+    </div>
+  </div>
 </div>

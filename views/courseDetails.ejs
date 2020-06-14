@@ -1,4 +1,4 @@
-<%- include ('header') %>
+<%- include ('headerStatic') %>
 <div class="row">
     <div class="col">
         <h1><%=title%></h1>        
@@ -33,7 +33,7 @@
             <%=selectedCourse.description%>
         </p>
         <hr>
-        <a href="/courses/studentCourses"><button class="btn btn-primary">Go back</button> </a>       
+        <a href="/courses/studentCourses/<%= user.name %>"><button class="btn btn-primary">Go back</button> </a>       
     </div>
 </div>
 

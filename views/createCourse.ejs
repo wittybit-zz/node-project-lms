@@ -10,7 +10,7 @@
     </div>
 <% } %>
 
-<form action="/courses/createCourse" method="post">
+<form action="/courses/createCourse/<%=  user.name %>" method="post">
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" name="name" />

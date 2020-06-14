@@ -2,7 +2,6 @@ const Course = require('../models/Course')
 
 exports.updateCourseProcess = (req, res) => {
     // const {name, description, photo, duration } = req.body
-
     const myBodyData = {
         name : req.body.name,
         description : req.body.description,
@@ -10,12 +9,11 @@ exports.updateCourseProcess = (req, res) => {
         duration : req.body.duration
     }
     //const entry = req.params.id
-    
     //find and delete the course
     Course.findOneAndUpdate({_id: req.params.id}, myBodyData, function(err, course){
         if(err)
             return next(err)
-        res.redirect('/courses/listCourses')
+        res.redirect('/courses/listCourses/'+ req.params.n)
         console.log('entry',req.params.id,myBodyData)
     })
     
@@ -34,7 +32,7 @@ exports.createCourseProcess = (req, res) => {
     course.duration = Number(duration)
     
     course.save()
-        .then(() => res.redirect('/courses/listCourses'))
+        .then(() => res.redirect('/courses/listCourses/'+req.params.n))
         .catch(err => res.status(400).json(err))
 }
 
@@ -43,10 +41,13 @@ exports.createCourse = (req, res) => {
         title: 'LMS | Add Course',
         errors: req.session.errors
     }
+    const user = {
+        name: req.params.n
+    }
     
     req.session.errors = {}
     
-    res.render('createCourse', data)
+    res.render('createCourse', {user:user,title: 'LMS | Add Course', errors: req.session.errors})
 }
 
 exports.listCourses = (req, res) => {
@@ -71,8 +72,10 @@ exports.studentCourses = (req, res) => {
                 title: 'LMS | List of Courses',
                 courses
             }
-            
-            res.render('studentCourses', data)
+            const user ={
+                name:req.params.n
+            } 
+            res.render('studentCourses', { title: 'LMS | List of Courses',user:user,courses:courses})
         })
         .catch(err => {
             res.json(err)
@@ -89,9 +92,12 @@ exports.updateCourse = (req, res) => {
             title: 'LMS | Course to edit',
             matchedCourse
         }
+        const user = {
+            name: req.params.n
+        }
         console.log("///////////////////////////////////////////////////")
         console.log(matchedCourse)
-        res.render('updateCourse', data)
+        res.render('updateCourse', {user:user,title: 'LMS | Course to edit',matchedCourse:matchedCourse})
     })
     .catch(err => {
         res.json(err)
@@ -124,7 +130,7 @@ exports.updateCourse = (req, res) => {
 exports.deleteCourse = (req, res) => {
     //const name = req.params.id
     Course.findOneAndDelete({_id: req.params.id})
-        .then(() => res.redirect('/courses/listCourses'))
+        .then(() => res.redirect('/courses/listCourses/'+req.params.n))
 }
 
 exports.courseDetails = (req, res) => {
@@ -135,9 +141,12 @@ exports.courseDetails = (req, res) => {
             title: 'LMS | Course to edit',
             selectedCourse
         }
+        const user ={
+            name:req.params.n
+        }
         console.log("////////////////////////course Details///////////////////////////")
         console.log(selectedCourse)
-        res.render('courseDetails', data)
+        res.render('courseDetails', {user:user,title: 'LMS | Course to edit',selectedCourse:selectedCourse})
     })
     .catch(err => {
         res.json(err)

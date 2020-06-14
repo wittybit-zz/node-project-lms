@@ -23,6 +23,8 @@ exports.loginProcess = (req, res) => {
                 if(valid && user.isInstructor == true) {
                     logged_in = true;
                     mail = user.email
+                    user_name = user.name;
+                    user_type = 1;
                     res.redirect(`/dashboard/${user._id}`)
                     //res.render('/courses/listCourses')
                 }
@@ -30,6 +32,8 @@ exports.loginProcess = (req, res) => {
                 {
                     logged_in = true;
                     mail = user.email
+                    user_name = user.name;
+                    user_type = 0;
                     res.redirect(`/dashboard/${user._id}`)
                 } else {
                     console.log('Not Valid Password')
@@ -76,6 +80,7 @@ exports.userDashboard = (req, res) => {
             // console.log('///////////////////////////////////////////////////////')
             //console.log(data)
             console.log("USER DASHBOARD DATA IS",user)
+            
             res.render('dashboard', {title:title , user: user1})
         })
         .catch(err => {
