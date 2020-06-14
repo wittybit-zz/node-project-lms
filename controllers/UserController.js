@@ -91,7 +91,7 @@ exports.editProfile = (req, res) => {
             // console.log('///////////////////////////////////////////////////////')
             //console.log(data)
             console.log("EDIT DASHBOARD DATA IS",user)
-            res.render('editProfile', {title:title , user: user1})
+            res.render('editProfile', {title:title , user: user1}) //errors: req.session.errors
         })
         .catch(err => {
             res.json(err)
@@ -129,9 +129,9 @@ exports.navResolver = (req, res) => {
 }
 
 exports.changePasswordProcess = (req, res) => {
-    
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(req.body.password, salt);
+    
     //const user = new User()
     const user = User.findOneAndUpdate({_id: req.params.id},{password: hash},function(err, user){
         if(err)

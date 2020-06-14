@@ -1,0 +1,40 @@
+<%- include ('header') %>
+<div class="row">
+    <div class="col">
+        <h1><%=title%></h1>        
+    </div>
+    
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <table class="table text-light">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                    <tr>
+                        <td>
+                            <img src="<%=selectedCourse.photo%>" width="80px" />
+                        </td>
+                        <td><%=selectedCourse.name%></td>
+                        <td><%=selectedCourse.duration%></td>
+                    </tr>
+            </tbody>
+        </table>
+        <p class="text-light">
+            <h4>Description</h4>
+            <%=selectedCourse.description%>
+        </p>
+        <hr>
+        <a href="/courses/studentCourses"><button class="btn btn-primary">Go back</button> </a>       
+    </div>
+</div>
+
+<%- include ('footer') %>

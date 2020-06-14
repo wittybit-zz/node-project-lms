@@ -126,3 +126,22 @@ exports.deleteCourse = (req, res) => {
     Course.findOneAndDelete({name: name})
         .then(() => res.redirect('/courses/listCourses'))
 }
+
+exports.courseDetails = (req, res) => {
+    // const id2 = mongoose.Types.ObjectId(id)
+    Course.findOne({_id: req.params.id})
+    .then(selectedCourse => {
+        const data = {
+            title: 'LMS | Course to edit',
+            selectedCourse
+        }
+        console.log("////////////////////////course Details///////////////////////////")
+        console.log(selectedCourse)
+        res.render('courseDetails', data)
+    })
+    .catch(err => {
+        res.json(err)
+        console.log('error fetching data')
+        console.log(Object(name))
+    })
+}

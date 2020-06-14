@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const UserController = require('../controllers/UserController')
+const UserValidator = require('../controllers/UserValidator')
 
 //UI Routes
 router.get('/login', UserController.loginForm)

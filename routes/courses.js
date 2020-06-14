@@ -9,6 +9,8 @@ router.get('/listCourses', CourseController.listCourses)
 router.get('/createCourse', CourseController.createCourse)
 router.get('/updateCourse/:id', CourseController.updateCourse)
 router.get('/studentCourses', CourseController.studentCourses)
+router.get('/addCourse/:id',(req, res) => res.send('Add course GET works'))
+router.get('/courseDetails/:id',CourseController.courseDetails)
 
 //Process
 router.post('/createCourse', CourseValidator.createCourseValidator, CourseController.createCourseProcess)
