@@ -9,14 +9,14 @@ exports.updateCourseProcess = (req, res) => {
         photo: req.body.photo,
         duration : req.body.duration
     }
-    const entry = req.params.id
+    //const entry = req.params.id
     
     //find and delete the course
-    Course.findOneAndUpdate({name: entry}, myBodyData, function(err, course){
+    Course.findOneAndUpdate({_id: req.params.id}, myBodyData, function(err, course){
         if(err)
             return next(err)
         res.redirect('/courses/listCourses')
-        console.log('entry',entry,myBodyData)
+        console.log('entry',req.params.id,myBodyData)
     })
     
     
@@ -80,10 +80,10 @@ exports.studentCourses = (req, res) => {
 }
 
 exports.updateCourse = (req, res) => {
-    const name = req.params.id
-    console.log(name)
+    //const cid = req.params.id
+    //console.log(name)
     // const id2 = mongoose.Types.ObjectId(id)
-    Course.findOne({name: name})
+    Course.findOne({_id: req.params.id})
     .then(matchedCourse => {
         const data = {
             title: 'LMS | Course to edit',
@@ -122,8 +122,8 @@ exports.updateCourse = (req, res) => {
 // }
 
 exports.deleteCourse = (req, res) => {
-    const name = req.params.id
-    Course.findOneAndDelete({name: name})
+    //const name = req.params.id
+    Course.findOneAndDelete({_id: req.params.id})
         .then(() => res.redirect('/courses/listCourses'))
 }
 

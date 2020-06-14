@@ -29,7 +29,7 @@
         </table>        
     </div>
 </div>
-<form action="/courses/updateCourse/<%=matchedCourse.name%>" method="POST">
+<form action="/courses/updateCourse/<%=matchedCourse._id%>" method="POST">
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" name="name" value="<%=matchedCourse.name%>"/>
