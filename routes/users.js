@@ -11,7 +11,7 @@ router.get('/dashboard/:id', UserController.userDashboard)
 //Process
 router.post('/login', UserController.loginProcess)
 router.post('/register', UserController.registerProcess)
-router.post('/changePassword', (req, res) => res.send('List Courses Works!'))
+router.post('/changePassword/:id', UserController.changePasswordProcess)
 router.post('/editProfile/:id', UserController.editProfileProcess)
 
 module.exports = router

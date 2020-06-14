@@ -6,24 +6,48 @@
     
 </div>
 
-<div class="col">
-    <h3>Dashboard</h3>
-    <hr />
-    <form action="/editProfile/<%=user._id%>" method="post">
+<div class="row">
+    <div class="col">
+        <h3>Edit name and email</h3>
+        <hr />
+        <form action="/editProfile/<%=user._id%>" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" value="<%=user.name%>"/>
+            </div>
+    
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" value="<%=user.email%>"/>
+            </div>
+    
+            
+            
+            <button class="btn btn-primary">Save</button>
+        </form>
+        <hr>
+        
+    </div>
+    <div class="col">
+    <form action="/changePassword/<%=user._id%>" method="POST">
+        <h3>Edit Password</h3>
+        <hr>
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" value="<%=user.name%>"/>
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password"/>
         </div>
-
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" value="<%=user.email%>"/>
+            <label for="c_password">Confirm Password</label>
+            <input type="password" class="form-control" name="c_password"/>
         </div>
-
         
         
-        <button class="btn btn-primary">Save</button>
+        <input type="submit" value="Change Password" class="btn btn-primary">
+        <hr>
     </form>
+    </div>
+
 </div>
+
 
 <%- include ('footer') %>

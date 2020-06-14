@@ -110,3 +110,33 @@ exports.editProfileProcess = (req, res) => {
         console.log('entry',req.params.id,myUserData)
     })
 }
+
+exports.navResolver = (req, res) => {
+    User.findOne(req.params.id)
+        .then(user => {
+            const data = {
+                title: 'abc',
+                user
+            }
+            if(user.isInstructor == true){
+                const navLink = `/listCourses`
+                res.redirect('/listCourses', navLink) //goes to listCourses and 
+            }else{
+                const navLink = '/studentCourses'
+                res.redirect = ('/studentCourses', navLink)
+            }
+        })
+}
+
+exports.changePasswordProcess = (req, res) => {
+    
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(req.body.password, salt);
+    //const user = new User()
+    const user = User.findOneAndUpdate({_id: req.params.id},{password: hash},function(err, user){
+        if(err)
+            return next(err)
+        res.redirect(`/dashboard/${req.params.id}`)
+        console.log('entry',req.params.id, req.body.password, hash)
+    })
+}
