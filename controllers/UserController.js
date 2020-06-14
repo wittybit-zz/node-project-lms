@@ -23,14 +23,14 @@ exports.loginProcess = (req, res) => {
                 if(valid && user.isInstructor == true) {
                     logged_in = true;
                     mail = user.email
-                    res.redirect('/courses/listCourses')
+                    res.redirect(`/dashboard/${user._id}`)
                     //res.render('/courses/listCourses')
                 }
                 else if(valid && user.isInstructor == false)
                 {
                     logged_in = true;
                     mail = user.email
-                    res.redirect('courses/studentCourses')
+                    res.redirect(`/dashboard/${user._id}`)
                 } else {
                     console.log('Not Valid Password')
                     res.redirect('/login')
@@ -69,15 +69,44 @@ exports.registerProcess = (req, res) => {
 }
 
 exports.userDashboard = (req, res) => {
-    User.findOne(mail)
+    User.findOne({_id: req.params.id})
         .then(user => {
                 const title = 'LMS | Dashboard'
                 const user1 = user
             // console.log('///////////////////////////////////////////////////////')
             //console.log(data)
+            console.log("USER DASHBOARD DATA IS",user)
             res.render('dashboard', {title:title , user: user1})
         })
         .catch(err => {
             res.json(err)
         })
+}
+
+exports.editProfile = (req, res) => {
+    User.findOne({_id: req.params.id})
+        .then(user => {
+                const title = 'LMS | Edit Profile'
+                const user1 = user
+            // console.log('///////////////////////////////////////////////////////')
+            //console.log(data)
+            console.log("EDIT DASHBOARD DATA IS",user)
+            res.render('editProfile', {title:title , user: user1})
+        })
+        .catch(err => {
+            res.json(err)
+        })
+}
+
+exports.editProfileProcess = (req, res) => {
+    const myUserData = {
+        name : req.body.name,
+        email : req.body.email
+    }
+    User.findOneAndUpdate({_id: req.params.id}, myUserData, function(err, course){
+        if(err)
+            return next(err)
+        res.redirect(`/dashboard/${req.params.id}`)
+        console.log('entry',req.params.id,myUserData)
+    })
 }

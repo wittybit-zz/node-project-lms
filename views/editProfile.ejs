@@ -9,20 +9,20 @@
 <div class="col">
     <h3>Dashboard</h3>
     <hr />
-    <form action="/editProfile/<%=user._id%>" method="get">
+    <form action="/editProfile/<%=user._id%>" method="post">
         <div class="form-group">
             <label for="name">Name</label>
-            <h6><%=user.name%></h6>
+            <input type="text" class="form-control" name="name" value="<%=user.name%>"/>
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <h6><%=user.email%></h6>
+            <input type="email" class="form-control" name="email" value="<%=user.email%>"/>
         </div>
 
         
         
-        <button class="btn btn-primary">Edit Profile</button>
+        <button class="btn btn-primary">Save</button>
     </form>
 </div>
 
