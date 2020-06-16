@@ -8,6 +8,7 @@ const UserValidator = require('../controllers/UserValidator')
 router.get('/login', UserController.loginForm)
 router.get('/editProfile/:id', UserController.editProfile)
 router.get('/dashboard/:id', UserController.userDashboard)
+router.get('/',(req, res)=>{res.redirect('/login')})
 
 //Process
 router.post('/login', UserController.loginProcess)
