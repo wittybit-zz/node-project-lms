@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
@@ -9,7 +10,7 @@ const courseRouter = require('./routes/courses')
 const userRouter = require('./routes/users')
 
 mongoose.connect(
-    'mongodb+srv://witty:Database1@cluster0-ibxek.mongodb.net/lms?retryWrites=true&w=majority',
+    process.env.CONNSRV,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -21,7 +22,7 @@ mongoose.connect(
 const app = express()
 
 const sess = {
-  secret: 'keyboard cat',
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {}
